@@ -2,7 +2,6 @@ use Mojolicious::Lite;
 use Digest::MD5 qw(md5_hex);
 use Scalar::Util 'weaken';
 use File::Basename qw(dirname); 
-use File::Slurp;
 use File::Spec::Functions qw(catdir catfile);
 use Mojolicious::Plugin::Config;
 use File::Copy;
@@ -11,7 +10,6 @@ use IO::File;
 use Encode qw(encode_utf8);
 use Cwd;
 use utf8;
-use Smart::Comments;
     
 our $VERSION = '1.0';
 $ENV{MOJO_MAX_MESSAGE_SIZE} = 2147483648;
