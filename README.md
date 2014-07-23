@@ -41,8 +41,8 @@ stream.pl 可以放在任何路径, StreamUpload.conf 请放到 '/etc' 的目录
                 user   => 'newupload',
                 group  => 'newupload',
         },
-        UploadServer   => 'http://117.79.131.133:4000',
-        CrossOrigins   => 'http://beta.i.yinyuetai.com',
+        UploadServer   => 'http://xxx.xxxx.com',
+        CrossOrigins   => 'http://xxx.xxxx.com',
         FileRepository => '/tmp/',
         debug          => 1,
         log            => '/var/log/upload.log',
@@ -55,7 +55,7 @@ stream.pl 可以放在任何路径, StreamUpload.conf 请放到 '/etc' 的目录
 
 哪些域名的文件, 是可以接收并存储的
 
-    CrossOrigins   => 'http://beta.i.yinyuetai.com'
+    CrossOrigins   => 'http://xxx.xxx.com'
 
 文件存储的目录
 
