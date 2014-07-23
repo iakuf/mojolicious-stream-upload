@@ -8,29 +8,41 @@ $ chmod +x  /sbin/cpanm
 然后开始安装
 cpanm Mojolicious EV Digest::MD5 
 
-安装, 直接使用 stream.pl 来启动就好了
-# 静态文件
-stream 的实现文件都在项目 http://git.oschina.net/jiangdx/stream 中. 大家需要先克隆这个项目.
-    I. 并在 stream.pl 的目标中, 创建 templates public 二个目录
-        mkdir templates
-        mkdir public
-    II. 并需要复制 stream 的 git 项目中的静态文件到相应的这二个目录
-        cp -r stream/{css,js}  ./public
-        cp index.html ./templates/index.html.ep
+安装
+stream 的实现文件都在项目 http://git.oschina.net/jiangdx/stream 中. 大家需要使用到其中二个文件 stream.pl 和 StreamUpload.conf
+所以可以使用任何法子下载这个项目中的文件.
 
 # 配置
+整个配置文件如下:
+    {
+        hypnotoad => {
+            listen => ['http://*:3008'],
+                user   => 'newupload',
+                group  => 'newupload',
+        },
+        UploadServer   => 'http://117.79.131.133:4000',
+        CrossOrigins   => 'http://beta.i.yinyuetai.com',
+        FileRepository => '/tmp/',
+        debug          => 1,
+        log            => '/var/log/upload.log',
+    }
+指定用户和组
+ user   => 'newupload'
+ group  => 'newupload'
+
 哪些域名的文件, 是可以接收并存储的
-my $CrossOrigins = 'http://test.yinyuetai.com';
+CrossOrigins   => 'http://beta.i.yinyuetai.com'
 
 文件存储的目录
-my $FILE_REPOSITORY = "/data/fileupload/t";
+FileRepository => '/tmp/'
 
 修改服务器启动的端口
-app->config(hypnotoad => {listen => ['http://*:3008']});
+listen => ['http://*:3008']
 
 
-# Perl 版本 Stream 启动
+# 启动
 hyphotoad 是一个常用的 Perl 后端的 Web 异步服务器, 为 Mojolicious 的原生配置. 多进程, 为 Unix 优化过. 所以使用它来启动, 
-hypnotoad stream.pl 
+
+$ hypnotoad stream.pl 
 
 现在就可以直接打开这个服务器来进行测试了
