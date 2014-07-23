@@ -27,8 +27,8 @@ Stream 这个项目主要是为了解决大文件上传, 本程序只是它的�
     $ cpanm Mojolicious EV Digest::MD5 
 
 # 安装
-stream 的实现文件都在项目 http://git.oschina.net/jiangdx/stream 中. 大家需要使用到其中二个文件 stream.pl 和 StreamUpload.conf
-所以可以使用任何方法下载这个项目中的文件.
+这个 Perl 的后端的 stream 的实现文件都在项目 https://github.com/iakuf/mojolicious-stream-upload 中. 大家需要使用到其中二个文件 stream.pl 和 StreamUpload.conf
+所以可以使用任何方法下载这个项目中的文件. 其中 stream.pl 是执行文件, StreamUpload.conf 是配置文件.
 
 stream.pl 可以放在任何路径, StreamUpload.conf 请放到 '/etc' 的目录下.
 
