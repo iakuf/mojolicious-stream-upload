@@ -16,7 +16,7 @@ Stream 这个项目主要是为了解决大文件上传, 本程序只是它的�
 
 # Stream 的 Perl 后端 
 
-本后端是使用 Perl 中常用的框架 Mojolicious 实现. 本程序做为后端接收上传过来的大文件的时候, 完全使用的是异步流式处理, 所以就算是单进程, 也可以处理多个上传的请求. 并且不会有多少内存的占用.
+本上传的后端, 是用来接收 HTML5 上传过来的文件, 并存储在指定的位置, 这是使用 Perl 中常用的框架 Mojolicious 实现. 本程序做为后端接收上传过来的大文件的时候, 完全使用的是异步流式处理, 所以就算是单进程, 也可以处理多个上传的请求. 并且不会有多少内存的占用.
 因为使用 Mojolicious 实现, 所以需要安装这个框架和一些相关的模块. Perl 中模块的安装需要使用 cpanm 所以先要下载 cpanm .
 
     $ wget  http://xrl.us/cpanm  --no-check-certificate -O /sbin/cpanm
@@ -27,12 +27,30 @@ Stream 这个项目主要是为了解决大文件上传, 本程序只是它的�
     $ cpanm Mojolicious EV Digest::MD5 
 
 # 安装
+
 这个 Perl 的后端的 stream 的实现文件都在项目 https://github.com/iakuf/mojolicious-stream-upload 中. 大家需要使用到其中二个文件 stream.pl 和 StreamUpload.conf
 所以可以使用任何方法下载这个项目中的文件. 其中 stream.pl 是执行文件, StreamUpload.conf 是配置文件.
 
-stream.pl 可以放在任何路径, StreamUpload.conf 请放到 '/etc' 的目录下.
+stream.pl 可以放在你想给这个执行存放的路径都行, StreamUpload.conf 请放到 '/etc' 的目录下, 这样才能被读取到.
+
+对于 Stream 中的 js css flash 文件, 我们使用 Mojolicious 的特有功能, 都存储在 stream.pl 本身, 所以你并不需要在单独下载. 如果你想分离这些到相应的目录. 你可以执行以下的命令
+
+    $ perl ./stream.pl inflate
+
+以上命令会从 stream.pl 的 _DATA_ 部分给相应的静态文件都写到 templates 和 public 的目录中.
+
+# 启动
+
+hyphotoad 是一个常用的 Perl 后端的 Web 异步服务器, 为 Mojolicious 的原生配置. 多进程, 为 Unix 优化过. 所以使用它来启动, 
+
+    $ hypnotoad stream.pl 
+
+现在就可以直接打开这个服务器来进行测试了
 
 # 配置
+
+配置中, UploadServer 是一定需要修改的. 监听的端口可以根据实际来配置是否需要修改. FileRepository 一定需要修改.
+
 整个配置文件如下:
 
     {
@@ -65,9 +83,3 @@ stream.pl 可以放在任何路径, StreamUpload.conf 请放到 '/etc' 的目录
 
     listen => ['http://*:3008']
 
-# 启动
-hyphotoad 是一个常用的 Perl 后端的 Web 异步服务器, 为 Mojolicious 的原生配置. 多进程, 为 Unix 优化过. 所以使用它来启动, 
-
-    $ hypnotoad stream.pl 
-
-现在就可以直接打开这个服务器来进行测试了
