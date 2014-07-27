@@ -24,7 +24,8 @@ Stream 这个项目主要是为了解决大文件上传, 本程序只是它的�
 
 然后开始安装
 
-    $ cpanm Mojolicious EV Digest::MD5 
+    $ cpanm EV Digest::MD5 Digest::SHA IO::Compress::Gzip Compress::Raw::Zlib Time::HiRes Mojolicious
+
 
 # 安装
 
@@ -71,7 +72,7 @@ hyphotoad 是一个常用的 Perl 后端的 Web 异步服务器, 为 Mojolicious
     user   => 'newupload'
     group  => 'newupload'
 
-哪些域名的文件, 是可以接收并存储的
+哪些域名的文件, 是可以接收并存储的, 如果本地测试, 接收和取 token 的服务器是同一台, 注意这时这个参数要和 UploadServer 的地址是一样的. 
 
     CrossOrigins   => 'http://xxx.xxx.com'
 
