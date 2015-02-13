@@ -3,6 +3,7 @@ use Digest::MD5 qw(md5_hex);
 use Scalar::Util 'weaken';
 use File::Basename qw(dirname); 
 use File::Spec::Functions qw(catdir catfile);
+use Asset::File;
 use Mojolicious::Plugin::Config;
 use File::Copy;
 use Mojo::JSON qw(encode_json);
@@ -45,7 +46,7 @@ hook after_build_tx => sub {
                 $tx->req->param(name => $filePath);             # 最终路径名
                 $tx->req->param(path => $filePath . '.temp');   # 中间临时路径名
                 createDir($filePath);
-                $file = Mojo::Asset::File->new(path => $tx->req->param('path'), cleanup => 0);  # 整个句柄
+                $file = Asset::File->new(path => $tx->req->param('path'), cleanup => 0);  # 整个句柄
         }
 
         if (!$file) {
@@ -128,7 +129,7 @@ any [qw(POST OPTIONS GET)] =>  '/upload' => sub {
     $self->res->headers->header('Access-Control-Allow-Origin'  => $CrossOrigins);
     $self->res->headers->header('Access-Control-Allow-Methods' => 'POST, GET, OPTIONS');
 
-    my $file = Mojo::Asset::File->new(path => $self->param('path'));  # 整个句柄
+    my $file = Asset::File->new(path => $self->param('path'));  # 整个句柄
     
     return $self->render(json => {
         start   => $file->size || 0,

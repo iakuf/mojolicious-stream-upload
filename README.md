@@ -24,7 +24,7 @@ Stream 这个项目主要是为了解决大文件上传, 本程序只是它的�
 
 然后开始安装
 
-    $ cpanm EV Digest::MD5 Digest::SHA IO::Compress::Gzip Compress::Raw::Zlib Time::HiRes Mojolicious
+    $ cpanm EV Digest::MD5 Digest::SHA IO::Compress::Gzip Compress::Raw::Zlib Time::HiRes Asset::File Mojolicious
 
 
 # 安装
